@@ -1,0 +1,13 @@
+class Solution {
+public:
+    void fun(int idx,vector<char>&s){
+        if(idx>=(s.size()-idx-1)) return;
+        char ch=s[idx];
+        s[idx]=s[s.size()-idx-1];
+        s[s.size()-idx-1]=ch;
+        fun(idx+1,s);
+    }
+    void reverseString(vector<char>& s) {
+        fun(0,s);
+    }
+};

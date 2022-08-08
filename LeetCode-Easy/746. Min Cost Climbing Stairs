@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int fun(int idx,vector<int>cost,vector<int>&dp){
+        if(idx>=cost.size()) return 0;
+        if(dp[idx]!=-1) return dp[idx];
+        int left=fun(idx+1,cost,dp)+cost[idx];
+        int right=fun(idx+2,cost,dp)+cost[idx];
+        return dp[idx]=min(left,right);
+    }
+    int minCostClimbingStairs(vector<int>& cost) {
+        vector<int>dp(cost.size()+1,-1);
+        return min(fun(0,cost,dp),fun(1,cost,dp));
+    }
+};

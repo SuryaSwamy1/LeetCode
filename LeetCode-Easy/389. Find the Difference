@@ -1,0 +1,20 @@
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        sort(t.begin(),t.end());
+        sort(s.begin(),s.end());
+        int i=0,j=0;
+        while(i<t.length() && j<s.length()){
+            if(t[j]!=s[i]){
+                return t[j];
+            }
+            i++;
+            j++;
+        }
+        while(j<t.length()){
+            return t[j];
+        }
+        return t[j];
+    
+    }
+};

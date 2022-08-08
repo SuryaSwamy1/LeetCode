@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+        vector<int> v;
+        for(int i=0;i<nums1.size();i++){
+            int l=0,h=nums2.size()-1;
+            while(l<=h){
+                int mid=l+(h-l)/2;
+                if(nums2[mid]==nums1[i]){
+                    v.push_back(nums2[mid]);
+                    nums2[mid]=false;
+                    break;
+                }
+                else if(nums2[mid]>nums1[i]){
+                    h=mid-1;
+                }
+                else{
+                    l=mid+1;
+                }
+            }
+        }
+        return v;
+    }
+};

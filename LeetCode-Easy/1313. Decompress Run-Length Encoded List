@@ -1,0 +1,19 @@
+class Solution {
+public:
+    void fun(vector<int> &v,int fre,int val){
+        while(fre--){
+            v.push_back(val);
+        }
+        return;
+    }
+    vector<int> decompressRLElist(vector<int>& nums) {
+        vector<int> v;
+        for(int i=0;i<nums.size()/2;i++){
+            int d=i*2;
+            int fre=nums[d];
+            int val=nums[d+1];
+            fun(v,fre,val);
+        }
+        return v;
+    }
+};

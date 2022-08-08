@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool validPalindrome(string s) {
+        int i=0,j=s.length()-1,c=0;
+        while(i<j){
+            if(s[i]==s[j]){
+                i++;
+                j--;
+            }
+            else{
+                i++;
+                c++;
+            }
+        }
+        if(c>1){
+            c=0;
+            i=0,
+            j=s.length()-1;
+            while(i<j){
+                if(s[i]==s[j]){
+                    i++;
+                    j--;
+                }
+                else{
+                    j--;
+                    c++;
+                }
+            }
+        }
+        if(c>1) return false;
+        return true;
+    }
+};

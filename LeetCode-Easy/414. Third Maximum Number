@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        vector<int> n;
+        map<int,int> m;
+        for(int i=0;i<nums.size();i++){
+            m[nums[i]];
+        }
+        map<int,int>::iterator it;
+        for(it=m.begin();it!=m.end();it++){
+            n.push_back((*it).first);
+        }
+        if(n.size()>2)
+        return n[n.size()-3];
+        return n[n.size()-1];
+    }
+};

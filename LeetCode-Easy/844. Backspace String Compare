@@ -1,0 +1,50 @@
+class Solution {
+public:
+    bool backspaceCompare(string s, string t) {
+        int i=0,j=0;
+        while(i<s.length()){
+            if(s[i]>='a' and s[i]<='z') i++;
+            else if(s[i]=='#'){
+                s[i]='-';
+                if(i>0) j=i-1;
+                while(i>0 and s[j]<'a' and s[j]<'z' and j>0) j-=1;
+                if(s[j]>='a' and s[j]<='z') s[j]='-';
+                i++;
+            }
+        }
+        //cout<<s<<endl;
+        i=0,j=0;
+        while(i<t.length()){
+            if(t[i]>='a' and t[i]<='z') i++;
+            else if(t[i]=='#'){
+                t[i]='-';
+                if(i>0) j=i-1;
+                while(i>0 and t[j]<'a' and t[j]<'z' and j>0) j-=1;
+                if(t[j]>='a' and t[j]<='z') t[j]='-';
+                i++;
+            }
+        }
+        //cout<<t<<endl;
+        i=0,j=0;
+        while(i<s.length() and j<t.length()){
+            if(s[i]=='-' or t[j]=='-'){
+                if(s[i]=='-') i++;
+                if(t[j]=='-') j++;
+            }
+            else if(s[i]!=t[j]) return false;
+            else{
+                i++;
+                j++;
+            }
+        }
+        while(i<s.length()){
+           if(s[i]>='a' and s[i]<='z') return false; 
+            i++;
+        }
+        while(j<t.length()){
+            if(t[j]>='a' and t[j]<='z') return false;
+            j++;
+        }
+        return true;
+    }
+};

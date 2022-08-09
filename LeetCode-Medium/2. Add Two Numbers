@@ -1,0 +1,88 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int fun(ListNode* head){
+        int c=0;
+        ListNode* temp=head;
+        while(temp!=NULL){
+            temp=temp->next;
+            c++;
+        }
+        return c;
+    }
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        int a=fun(l1);
+        int b=fun(l2);
+        ListNode* temp1;
+        ListNode* temp2;
+        ListNode* r=new ListNode(-1);
+        ListNode* temp=r;
+        if(a>=b){
+            temp1=l1;
+            temp2=l2;
+        }
+        else{
+            temp1=l2;
+            temp2=l1;
+        }
+        int v=0,c=0,sum;
+        while(temp1!=NULL && temp2!=NULL){
+            sum=temp1->val+temp2->val;
+            if(sum>9){
+                v=sum%10;
+                sum=sum/10;
+                if(temp1->next!=NULL){
+                    temp1->next->val+=sum;
+                    sum=0;
+                }
+                temp1->val=v;
+                temp->next=temp1;
+                v=0;
+            }
+            else{
+                temp1->val=sum;
+                temp->next=temp1;
+                sum=0;
+            }
+            temp1=temp1->next;
+            temp2=temp2->next;
+            temp=temp->next;
+            c++;
+        }
+        v=0;
+        while(temp1!=NULL){
+            sum=temp1->val;
+            if(sum>9){
+                v=sum%10;
+                sum=sum/10;
+                if(temp1->next!=NULL){
+                    temp1->next->val+=sum;
+                }
+                temp1->val=v;
+                temp->next=temp1;
+                v=0;
+            }
+            else{
+                temp1->val=sum;
+                temp->next=temp1;
+                sum=0;
+            }
+            temp1=temp1->next;
+            temp=temp->next;
+        }
+        if(temp1==NULL && sum!=0){
+            ListNode* t=new ListNode(sum);
+            temp->next=t;
+        }
+        return r->next;
+    }
+};

@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void fun(int idx,vector<string>&ans,string s,vector<string>st){
+        if(idx==st.size()){
+            ans.push_back(s);
+            return;
+        }
+        string sup=st[idx];
+        for(int i=0;i<sup.size();i++){
+            s+=sup[i];
+            fun(idx+1,ans,s,st);
+            s.pop_back();
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        if(digits.length()==0) return {};
+        string a[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        vector<string>st;
+        for(int i=0;i<digits.size();i++) st.push_back(a[digits[i]-'0']);
+        vector<string> ans;
+        string s="";
+        fun(0,ans,s,st);
+        return ans;
+    }
+};

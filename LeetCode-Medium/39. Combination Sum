@@ -1,0 +1,22 @@
+class Solution {
+public:
+    void fun(int idx,int sum,vector<int> can,vector<int>v,vector<vector<int>>&ans){
+        if(idx==can.size()){
+            if(sum==0)ans.push_back(v);
+            //for(auto i:v)cout<<i<<" ";
+            return;
+        }
+        if(can[idx]<=sum){
+            v.push_back(can[idx]);
+            fun(idx,sum-can[idx],can,v,ans);
+            v.pop_back();
+        }
+        fun(idx+1,sum,can,v,ans);
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int>v;
+        vector<vector<int>>ans;
+        fun(0,target,candidates,v,ans);
+        return ans;
+    }
+};

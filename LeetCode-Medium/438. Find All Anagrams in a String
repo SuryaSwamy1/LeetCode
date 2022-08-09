@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool fun(int a[],int b[]){
+        for(int i=0;i<26;i++){
+            if(a[i]!=b[i]) return false;
+        }
+        return true;
+    }
+    vector<int> findAnagrams(string s, string p) {
+        if(p.length()>s.length()) return {};
+        vector<int>v;
+        int a[26]={0};
+        int b[26]={0};
+        for(int i=0;i<p.length();i++){
+            a[p[i]-'a']++;
+            b[s[i]-'a']++;
+        }
+        int j=p.length(),l=0;
+        while(j<s.length()){
+            if(fun(a,b)) v.push_back(l);
+            b[s[l]-'a']--;
+            l++;
+            b[s[j]-'a']++;
+            j++;
+        }
+        if(fun(a,b)) v.push_back(l);
+        return v;
+    }
+};

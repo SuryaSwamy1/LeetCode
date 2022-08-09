@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void fun(int idx,int n,int k,vector<int>&v,vector<vector<int>>&ans,int sum){
+        if(idx==n){
+            if(v.size()==k and sum==n) ans.push_back(v);
+            return;
+        }
+        if(sum<=n and idx<9 and v.size()<k){
+            sum+=idx+1;
+            v.push_back(idx+1);
+            fun(idx+1,n,k,v,ans,sum);
+            v.pop_back();
+            sum-=idx+1;
+        }
+        fun(idx+1,n,k,v,ans,sum);
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int>v;
+        vector<vector<int>>ans;
+        if(n>45) return ans;
+        fun(0,n,k,v,ans,0);
+        return ans;
+    }
+};

@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        queue<pair<int,int>>q;
+        q.push({0,0});
+        int cnt=0;
+        while(!q.empty()){
+            pair<int,int>i=q.front();
+            q.pop();
+            if(i.second+1<n) q.push({i.first,i.second+1});
+            if(i.first+1<m) q.push({i.first+1,i.second});
+            if(i.first==m-1 and i.second==n-1) cnt+=1;
+        }
+        return cnt;
+    }
+};

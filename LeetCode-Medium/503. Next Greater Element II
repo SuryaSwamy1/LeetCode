@@ -1,0 +1,39 @@
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int[] a=new int[nums.length];
+        Stack<Integer> left=new Stack<Integer>();
+        Stack<Integer> right=new Stack<Integer>();
+        a[nums.length-1]=-191817;
+        int ab=-99999;
+        if(nums.length==1){
+            a[0]=-1;
+            return a;
+        }
+        for(int i=nums.length-1;i>=0;i--){
+            if(right.empty()) right.push(nums[i]);
+            else{
+                while(!right.empty() && right.peek()<=nums[i]) right.pop();
+                if(!right.empty() && right.peek()>nums[i]) a[i]=right.peek();
+                else a[i]=-191817;
+                right.push(nums[i]);
+            }
+        }
+        for(int i=0;i<nums.length;i++){
+            if(left.empty()) left.push(nums[i]);
+            else if(nums[i]>left.peek()) left.push(nums[i]);
+            if(a[i]==-191817){
+                while(a[i]==-191817 && !left.empty() && left.peek()>nums[i]){
+                    ab=left.peek();
+                    left.pop();
+                }
+                if(a[i]==-191817 && ab>nums[i]){
+                    left.push(ab);
+                    a[i]=ab;
+                    ab=-99999;
+                }
+                else a[i]=-1;
+            }
+        }
+        return a;
+    }
+}

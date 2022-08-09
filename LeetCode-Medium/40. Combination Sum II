@@ -1,0 +1,41 @@
+class Solution {
+public:
+    void fun(int idx,int sum,vector<int>&cand,vector<int>&v,map<vector<int>,int>&m,vector<vector<int>>&ans){
+        if(idx==cand.size()){
+            if(sum==0){
+                m[v]+=1;
+                if(m[v]==1) ans.push_back(v);
+            }
+            return;
+        }
+        if(cand[idx]<=sum){
+            v.push_back(cand[idx]);
+            fun(idx+1,sum-cand[idx],cand,v,m,ans);
+            v.pop_back();
+        }
+        fun(idx+1,sum,cand,v,m,ans);
+    }
+    vector<vector<int>> combinationSum2(vector<int>& cand, int target) {
+        vector<int>v;
+        vector<vector<int>>ans;
+        map<vector<int>,int>m;
+        sort(cand.begin(),cand.end());
+        int c=0;
+        for(int i=1;i<cand.size();i++){
+            if(cand[i-1]==cand[i]) c++;
+            else break;
+        }
+        if(c==cand.size()-1 and cand.size()>1){
+            int sum=0,s=target/cand[0];
+            if(s>cand.size()) return ans;
+            for(int i=0;i<s;i++){
+                v.push_back(cand[i]);
+                sum+=cand[i];
+            }
+            if(sum==target) ans.push_back(v);
+            return ans;
+        }
+        fun(0,target,cand,v,m,ans);
+        return ans;
+    }
+};

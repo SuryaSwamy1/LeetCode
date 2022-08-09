@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int fun(string s,char a,int k){
+        int v=0;
+        int i=0,j=0;
+        while(i<s.length()and j<s.length()){
+            if(s[i]==a){
+                i++;
+            }
+            else if(k){
+                i++;
+                k--;
+            }
+            else{
+                if(s[j]!=a) k++;
+                j++;
+            }
+            int len=abs(i-j);
+            v=max(v,len);
+        }
+        return v;
+    }
+    int maxConsecutiveAnswers(string answerKey, int k) {
+        return max(fun(answerKey,'T',k),fun(answerKey,'F',k));
+    }
+};

@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> getStrongest(vector<int>& arr, int k) {
+        sort(arr.begin(),arr.end());
+        int median=arr[(arr.size()-1)/2];
+        int low=0,high=arr.size()-1;
+        vector<int>ans;
+        int cnt=0;
+        while(low<=high and cnt<k){
+            int left=abs(arr[low]-median);
+            int right=abs(arr[high]-median);
+            if(left>right) ans.push_back(arr[low++]);
+            else ans.push_back(arr[high--]);
+            cnt++;
+        }
+        return ans;
+    }
+};

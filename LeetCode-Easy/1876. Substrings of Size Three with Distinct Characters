@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int countGoodSubstrings(string s) {
+        map<char,int>m;
+	    int i=0,j=0,d=0;
+	    string res="";
+	    while(i<s.length()){
+		    if(m[s[i]]==0){
+			    m[s[i]]++;
+			    res+=s[i];
+			    i++;
+		    }
+		    else if(m[s[i]]>=1){	
+			    m[s[i]]--;
+			    reverse(res.begin(),res.end());
+			    while(res.find(s[i])!=string::npos){
+				    res.pop_back();
+			    }
+			    reverse(res.begin(),res.end());
+		    }
+		    if(res.length()>=3){
+			    d++;
+			    reverse(res.begin(),res.end());
+			    res.pop_back();
+			    reverse(res.begin(),res.end());
+		    }
+		    //cout<<res<<" ";
+	    }
+        return d;
+    }
+};

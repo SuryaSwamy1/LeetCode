@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int sum=0,c=0;
+        for(int i=0;i<nums.size();i++){
+            if(i>0){
+                if(nums[i]==nums[i-1]){
+                    nums[i-1]=0;
+                }
+            }
+            if(nums[i]<0 or nums[i]>nums.size()){
+                nums[i]=0;
+            }
+        }
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>0 and nums[i]<=nums.size()){
+                c=max(c,nums[i]);
+                sum+=nums[i];
+            }
+        }
+        int r=(c*(c+1))/2;
+        if(sum==r){
+            return c+1;
+        }
+        return abs(sum-r);
+    }
+};

@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool fun(vector<int> nums,int l,int h,int target){
+        while(l<=h){
+            int mid=l+(h-l)/2;
+            if(nums[mid]==target) return true;
+            else if(nums[mid]>target) h=mid-1;
+            else l=mid+1;
+        }
+        return false;
+    }
+    bool search(vector<int>& nums, int target) {
+        if(nums.size()==1){
+            if(nums[0]==target) return true;
+            return false;
+        }
+        int c=0;
+        for(int i=1;i<nums.size();i++) if(nums[i]==nums[i-1]) c++;
+        if(c==nums.size()-1) return target==nums[0];
+        if(nums[0]<nums[nums.size()-1]) return fun(nums,0,nums.size()-1,target);
+        int l=0,h=nums.size()-1;
+        while(l<=h){
+            int mid=l+(h-l)/2;
+            if(nums[mid]>nums[mid+1]){
+                if(target>=nums[0] and target<=nums[mid]) return fun(nums,0,mid,target);
+                return fun(nums,mid+1,nums.size()-1,target);
+            }
+            else if(nums[mid-1]>nums[mid]){
+                if(target>=nums[0] and target<=nums[mid-1]) return fun(nums,0,mid-1,target);
+                return fun(nums,mid,nums.size()-1,target);
+            }
+            else if(nums[mid]<nums[l]) h=mid-1;
+            else if(nums[mid]>nums[h]) l=mid+1;
+            else{
+                l++;
+                if(nums[l]<nums[mid]){
+                    if(target>=nums[0] and target<=nums[l-1]) return fun(nums,0,l-1,target);
+                    return fun(nums,l,nums.size()-1,target);
+                }
+            }
+        }
+        return false;
+    }
+};

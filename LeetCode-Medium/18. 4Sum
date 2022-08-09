@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        map<vector<int>,int>m;
+        vector<vector<int>>ans;
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<nums.size();i++){
+            for(int j=i+1;j<nums.size();j++){
+                int low=j+1,high=nums.size()-1;
+                vector<int>temp;
+                while(low<high){
+                    long long int sum=nums[i];
+                    if(sum>2147483647) return ans;
+                    sum+=nums[j];
+                    if(sum>2147483647) return ans;
+                    sum+=nums[low];
+                    if(sum>2147483647) return ans;
+                    sum+=nums[high];
+                    if(sum==target){
+                        temp.push_back(nums[i]);
+                        temp.push_back(nums[j]);
+                        temp.push_back(nums[low]);
+                        temp.push_back(nums[high]);
+                        if(m[temp]==0 and temp.size()>0) ans.push_back(temp);
+                        m[temp]++;
+                        temp.clear();
+                        low++;
+                        high--;
+                    }
+                    else if(sum>target) high--;
+                    else low++;
+                }
+            }
+        }
+        return ans;
+    }
+};

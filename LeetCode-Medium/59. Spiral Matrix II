@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>>ans(n,vector<int>(n,0));
+        int row=0,col=n-1,c=1;
+        while(row<n and col>=0){
+            for(int i=row;i<=col;i++){ ans[row][i]=c; c++;}
+            for(int i=row+1;i<=col;i++){ ans[i][col]=c; c++;}
+            for(int i=col-1;i>=row;i--){ ans[col][i]=c; c++;}
+            row++;
+            for(int i=col-1;i>=row;i--){ ans[i][row-1]=c; c++;}
+            col--;
+        }
+        return ans;
+    }
+};

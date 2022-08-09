@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int countOdds(int low, int high) {
+        int c=0;
+        if(low%2==0){
+            low++;
+        }
+        int i=low;
+        while(i<=high){
+            c++;
+            i+=2;
+        }
+        return c;
+    }
+};

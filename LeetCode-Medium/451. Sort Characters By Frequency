@@ -1,0 +1,19 @@
+class Solution {
+public:
+    string frequencySort(string s) {
+        map<char,int>m;
+        for(int i=0;i<s.length();i++) m[s[i]]++;
+        vector<pair<int,char>>ans;
+        for(auto i:m) ans.push_back({i.second,i.first});
+        sort(ans.begin(),ans.end());
+        string t;
+        for(auto i:ans){
+            while(i.first){
+                t+=i.second;
+                i.first--;
+            }
+        }
+        reverse(t.begin(),t.end());
+        return t;
+    }
+};

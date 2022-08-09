@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        map<int,int>m;
+        for(auto i:nums) m[i]++;
+        int cnt=0,j=0;
+        for(auto i:m){
+            if(i.second>1){
+                nums[j]=i.first;
+                j++;
+                cnt++;
+            } 
+            nums[j]=i.first;
+            j++;
+            cnt++;
+        }
+        return cnt;
+    }
+};

@@ -1,0 +1,22 @@
+class Solution {
+public:
+    void fun(int idx,vector<int>nums,vector<int>&v,vector<vector<int>>&ans,map<vector<int>,int>&m){
+        if(idx==nums.size()){
+            m[v]++;
+            if(m[v]==1) ans.push_back(v);
+            return;
+        }
+        v.push_back(nums[idx]);
+        fun(idx+1,nums,v,ans,m);
+        v.pop_back();
+        fun(idx+1,nums,v,ans,m);
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>>ans;
+        map<vector<int>,int>m;
+        vector<int>v;
+        sort(nums.begin(),nums.end());
+        fun(0,nums,v,ans,m);
+        return ans;
+    }
+};

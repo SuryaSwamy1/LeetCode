@@ -1,0 +1,40 @@
+class Solution {
+public:
+    void fun(vector<vector<int>>& ans,int i,int j,int n,int m,priority_queue<int,vector<int>,greater<int>>q){
+        while(i>=0 and i<n and j>=0 and j<m){
+            ans[i][j]=q.top();
+            q.pop();
+            i++;
+            j++;
+        }
+    }
+    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+        int n=mat.size();
+        int m=mat[0].size();
+        int i=n-1;
+        while(i>=0){
+            priority_queue<int,vector<int>,greater<int>>q;
+            int a=i,b=0;
+            while(a>=0 and b>=0 and a<n and b<m){
+                q.push(mat[a][b]);
+                a++;
+                b++;
+            }
+            fun(mat,i,0,n,m,q);
+            i--;
+        }
+        int j=0;
+        while(j<m){
+            priority_queue<int,vector<int>,greater<int>>w;
+            int c=0,d=j;
+            while(c>=0 and c<n and d>=0 and d<m){
+                w.push(mat[c][d]);
+                c++;
+                d++;
+            }
+            fun(mat,0,j,n,m,w);
+            j++;
+        }
+        return mat;
+    }
+};

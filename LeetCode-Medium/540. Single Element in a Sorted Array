@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int fun(vector<int>a,int n,int l,int h){
+	while(l<=h){
+		int mid=l+(h-l)/2;
+		if(a[mid]!=a[mid+1] and a[mid]!=a[mid-1]) return a[mid];
+		else if(a[mid]==a[mid+1]){
+			if(abs(mid+1-n-1)%2==0) h=mid-1;
+			else l=mid+1;
+		}
+		else if(a[mid]==a[mid-1]){
+			if(abs(mid-1)%2==0) l=mid+1;
+			else h=mid-1;
+		}
+	}
+	if(l>=0 and l<n) return a[l];
+	if(h<n and h>=0) return a[h];
+    return -1;
+}
+    int singleNonDuplicate(vector<int>& nums) {
+        if(nums.size()==1) return nums[0];
+        if(nums[0]!=nums[1]) return nums[0];
+        if(nums[nums.size()-2]!=nums[nums.size()-1])return nums[nums.size()-1];
+        return fun(nums,nums.size(),0,nums.size()-1);
+    }
+};

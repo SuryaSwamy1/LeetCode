@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int xorOperation(int n, int start) {
+        long long int sum=0;
+        long long int j=0;
+        while(j<n){
+            sum^=start;
+            start+=2;
+            j++;
+        }
+        return sum;
+    }
+};

@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int fun1(vector<int>nums,int target){
+        int l=0,h=nums.size()-1;
+        while(l<=h){
+            int mid=l+(h-l)/2;
+            if(nums[mid]>=target){
+                h=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return l;
+    }
+    int fun2(vector<int>nums,int target){
+        int l=0,h=nums.size()-1;
+        while(l<=h){
+            int mid=l+(h-l)/2;
+            if(nums[mid]<=target){
+                l=mid+1;
+            }
+            else{
+                h=mid-1;
+            }
+        }
+        return h;
+    }
+    vector<int> targetIndices(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        vector<int>v;
+        int a=fun1(nums,target);
+        int b=fun2(nums,target);
+        for(int i=a;i<=b;i++){
+            v.push_back(i);
+        }
+        return v;
+    }
+};
